@@ -1,5 +1,5 @@
 import {writable} from 'svelte/store';
-import Line from './line';
+import {Line} from './line';
 import {Point} from './point';
 
 const line = new Line(new Point(0, 0), new Point(2, 3));
