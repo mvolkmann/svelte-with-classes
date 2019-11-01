@@ -1,6 +1,4 @@
-import {writable} from 'svelte/store';
-
-export class Point {
+export default class Point {
   constructor(x, y) {
     this.x = x;
     this.y = y;
@@ -13,15 +11,6 @@ export class Point {
   translate(dx, dy) {
     this.x += dx;
     this.y += dy;
+    return this;
   }
-}
-
-export function pointCustomStore(x, y) {
-  const {subscribe, update} = writable({x, y});
-  return {
-    subscribe,
-    translate(dx, dy) {
-      update(({x, y}) => ({x: x + dx, y: y + dy}));
-    }
-  };
 }

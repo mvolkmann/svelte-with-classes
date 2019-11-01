@@ -1,7 +1,6 @@
-import {writable} from 'svelte/store';
-import {Point} from './point';
+import Point from './point';
 
-export class Line {
+export default class Line {
   constructor(start, end) {
     this.start = start;
     this.end = end;
@@ -14,19 +13,6 @@ export class Line {
   translate(dx, dy) {
     this.start.translate(dx, dy);
     this.end.translate(dx, dy);
+    return this;
   }
-}
-
-export function lineCustomStore(start, end) {
-  const {subscribe, update} = writable({start, end});
-  return {
-    subscribe,
-    translate(dx, dy) {
-      update(({start, end}) => {
-        start.translate(dx, dy);
-        end.translate(dx, dy);
-        return {start, end};
-      });
-    }
-  };
 }
