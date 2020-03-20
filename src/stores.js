@@ -10,14 +10,17 @@ export const lineStore = writable(line);
 export function pointStore2(x, y) {
   const store = writable({x, y});
   const {subscribe, update} = store;
+  let cache = {x, y};
   return {
     subscribe,
     toString() {
-      const {x, y} = get(store);
-      return `(${x}, ${y})`;
+      return `(${cache.x}, ${cache.y})`;
     },
     translate(dx, dy) {
-      update(({x, y}) => ({x: x + dx, y: y + dy}));
+      update(({x, y}) => {
+        cache = {x: x + dx, y: y + dy};
+        return cache;
+      });
     }
   };
 }
